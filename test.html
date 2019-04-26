@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <link rel=stylesheet href="./jquery-ui-1.12.1.custom/jquery-ui.css" type="text/css">
+    <link rel=stylesheet href="./gantt_timebar.css" type="text/css">
+    <script src="./jquery.min.js"></script>
+    <script src="./jquery-ui-1.12.1.custom/jquery-ui.js"></script>
+    <script src="./datepicker-zh-CN.js"></script>
+    <script src="./gantt_timebar.js"></script>
+</head>
+
+<body>
+    <!-- 容器 -->
+    <div id="box1" style="width: 700px;height: 200px;">
+    </div>
+
+    <script>
+        // 测试数据
+        var data = [{
+            id: 1,
+            name: '开盘',
+            start: '2018-05-10',
+            end: '2018-07-10',
+            color: '#ff0000',
+            type: 'node',
+            children: [{
+                id: 2,
+                name: '住宅',
+                start: '2018-05-10',
+                end: '2018-08-10',
+                color: '#00ff00',
+                type: 'house',
+            }, {
+                id: 10,
+                name: '住宅 3期',
+                start: '2018-10-10',
+                end: '2019-06-07',
+                color: '#cccccc',
+                type: 'house'
+            }, {
+                id: 9,
+                name: '住宅 2期',
+                start: '2018-10-10',
+                end: '2019-06-07',
+                color: '#cccccc',
+                type: 'house'
+            }, {
+                id: 3,
+                name: '酒店',
+                start: '2018-08-30',
+                end: '2018-11-10',
+                color: '#0000ff',
+                type: 'hotel',
+            }, {
+                id: 8,
+                name: '商业',
+                start: '2018-09-30',
+                end: '2018-11-10',
+                color: '#0000ff',
+                type: 'business',
+            }]
+        }, {
+            id: 4,
+            name: '开工',
+            start: '2018-12-10',
+            end: '2019-07-10',
+            color: '#ff0000',
+            type: 'node',
+            children: [{
+                id: 5,
+                name: '住宅',
+                start: '2019-05-10',
+                end: '2020-06-10',
+                color: '#00ff00',
+                type: 'house',
+            }, {
+                id: 6,
+                name: '工业园',
+                start: '2018-05-30',
+                end: '2019-07-10',
+                color: '#0000ff',
+                type: 'industry',
+            }, {
+                id: 7,
+                name: '游乐园',
+                start: '2019-05-30',
+                end: '2020-06-30',
+                color: '#0000ff',
+                type: 'park',
+            }]
+        }, {
+            id: 11,
+            name: '封顶',
+            start: '2018-06-10',
+            end: '2019-10-10',
+            color: '#ff0000',
+            type: 'node',
+            children: []
+        }]
+
+        // 配置信息
+        var opts = {
+            boxId: 'box1',
+            saveData: function (data) {
+                // 保存数据到后台
+                // $.ajax({
+                //     type: 'POST',
+                //     url: url,
+                //     data: data,
+                //     dataType: 'json',
+                //     success: function (res) {
+                //         data.id = res.data.id;
+                //         timeBar.saveDataLocal(data)  // 更新数据
+                //     },
+                //     error: function (error) {
+                //         timeBar.saveDataError("保存数据失败，请重试...")  // 错误提示
+                //     }
+                // });
+
+                // 测试流程
+                setTimeout(function () {
+                    data.id = new Date().getTime();
+                    timeBar.saveDataLocal(data)  // 更新数据
+                    // timeBar.saveDataError("保存数据失败，请重试...")
+                }, 2000)
+            },
+            delData: function (ids) {  // 需要删除的 id ，格式是数组
+                // 保存数据到后台
+                // $.ajax({
+                //     type: 'POST',
+                //     url: url,
+                //     data: {ids: ids},
+                //     dataType: 'json',
+                //     success: function (res) {
+                //         timeBar.delDataLocal()  
+                //     },
+                //     error: function (error) {
+                //         timeBar.delDataError("保存数据失败，请重试...")  // 错误提示
+                //     }
+                // });
+
+                // 测试流程
+                setTimeout(function () {
+                    timeBar.delDataLocal()  
+                    // timeBar.delDataError("删除数据失败，请重试...")
+                }, 2000)
+            }
+        }
+
+        // 实例化
+        var timeBar = new GanttTimebar(data, opts);
+
+        // 获取数据
+        // timeBar.data;
+
+        // 获取配置
+        // timeBar.opts;
+
+    </script>
+</body>
+
+</html>
